@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Users from "./Users";
 import CreateUser from "./CreateUser";
 import UpdateUser from "./UpdateUser";
-function App() {S
+function App() {
   return (
     <div>
       <BrowserRouter>
