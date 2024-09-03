@@ -3,14 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {deleteUser} from './slices/userSlice'
-
+import { deleteUser } from "./slices/userSlice";
 
 function Users() {
   const [users, setUsers] = useState([]);
 
-  // const users= useSelector(state => state.users.users)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -23,9 +21,8 @@ function Users() {
     axios
       .delete("https://crud-server-1-vk1n.onrender.com/deleteUser/" + id)
       .then((result) => {
-        dispatch(deleteUser({id}))
+        dispatch(deleteUser({ id }));
         console.log(result);
-        // setUsers(users.filter((user) => user._id !== id));
       })
       .catch((err) => console.log(err));
   };
