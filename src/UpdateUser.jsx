@@ -34,7 +34,7 @@ function UpdateUser() {
   const Update = (e) => {
     e.preventDefault();
     axios
-      .put("https://crud-server-1-vk1n.onrender.com/updateUser" + id, {
+      .put("https://crud-server-1-vk1n.onrender.com/updateUser/" + id, {
         name,
         age,
         address,

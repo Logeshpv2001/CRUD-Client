@@ -10,7 +10,7 @@ function UserHistory() {
 
   useEffect(() => {
     axios
-      .get(`https://crud-server-1-vk1n.onrender.com/${id}`)
+      .get(`https://crud-server-1-vk1n.onrender.com/userHistory/${id}`)
       .then((result) => setHistory(result.data))
       .catch((err) => console.log(err));
   }, [id]);
