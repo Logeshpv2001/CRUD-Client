@@ -14,7 +14,7 @@ function Users() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001")
+      .get("https://crud-server-1-vk1n.onrender.com")
       .then((result) => setUsers(result.data))
       .catch((err) => console.log(err));
   }, []);

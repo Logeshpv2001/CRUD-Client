@@ -17,7 +17,7 @@ function UpdateUser() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/getUser/" + id)
+      .get("https://crud-server-1-vk1n.onrender.com/" + id)
       .then((result) => {
         console.log(result);
         setName(result.data.name);
@@ -34,7 +34,7 @@ function UpdateUser() {
   const Update = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:3001/updateUser/" + id, {
+      .put("https://crud-server-1-vk1n.onrender.com/" + id, {
         name,
         age,
         address,
