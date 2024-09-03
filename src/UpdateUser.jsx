@@ -1,15 +1,22 @@
 import axios from "axios";
-import React, { useEffect ,useState} from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate, useParams } from "react-router-dom";
+import { addUser } from "./slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+
 
 function UpdateUser() {
   const { id } = useParams();
   const [name, setName] = useState();
-  const [email, setEmail] = useState();
+  const [address, setAddress] = useState();
+  const [department, setDepartment] = useState();
   const [age, setAge] = useState();
+  const [employmentStatus, setEmploymentStatus] = useState("");
   const navigate = useNavigate();
+
 
   useEffect(() => {
     axios
@@ -17,17 +24,30 @@ function UpdateUser() {
       .then((result) => {
         console.log(result);
         setName(result.data.name);
-        setEmail(result.data.email);S
+        setAddress(result.data.address)
         setAge(result.data.age);
+        setDepartment(result.data.department)
+        setEmploymentStatus(result.data.employmentStatus);
       })
       .catch((err) => console.log(err));
-  },[]);
+  }, []);
+
+
+
+  const dispatch = useDispatch();
 
   const Update = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:3001/updateUser/"+id, { name, email, age })
+      .put("http://localhost:3001/updateUser/" + id, {
+        name,
+        age,
+        address,
+        department,
+        employmentStatus,
+      })
       .then((result) => {
+        dispatch(addUser(result.data))
         console.log(result);
         navigate("/");
       })
@@ -51,24 +71,24 @@ function UpdateUser() {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
+        <Form.Label>Address</Form.Label>
         <Form.Control
-          type="email"
-          placeholder="Enter email"
-          value={email}
+          type="text"
+          placeholder="Enter address"
+          value={address}
           onChange={(e) => {
-            setEmail(e.target.value);
+            setAddress(e.target.value);
           }}
         />
         <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
+          We'll never share your address with anyone else.
         </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Age</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           placeholder="Enter age"
           value={age}
           onChange={(e) => {
@@ -76,9 +96,36 @@ function UpdateUser() {
           }}
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        {/* <Form.Check type="checkbox" label="Check me out" /> */}
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Department</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter department"
+          value={department}
+          onChange={(e) => {
+            setDepartment(e.target.value);
+          }}
+        />
+        <Form.Text className="text-muted">
+          We'll never share your department with anyone else.
+        </Form.Text>
       </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmploymentStatus">
+        <Form.Label>Employment Status</Form.Label>
+        <Form.Control
+          as="select"
+          value={employmentStatus}
+          onChange={(e) => setEmploymentStatus(e.target.value)}
+        >
+          <option value="">Select Employment Status</option>
+          <option value="Remote Location">Remote Location</option>
+          <option value="Contract Employee">Contract Employee</option>
+          <option value="Full-Time">Full-Time</option>
+        </Form.Control>
+      </Form.Group>
+
       <Button variant="primary" type="submit">
         Update
       </Button>
