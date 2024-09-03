@@ -6,8 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addUser } from "./slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 function UpdateUser() {
   const { id } = useParams();
   const [name, setName] = useState();
@@ -17,22 +15,19 @@ function UpdateUser() {
   const [employmentStatus, setEmploymentStatus] = useState("");
   const navigate = useNavigate();
 
-
   useEffect(() => {
     axios
       .get("http://localhost:3001/getUser/" + id)
       .then((result) => {
         console.log(result);
         setName(result.data.name);
-        setAddress(result.data.address)
+        setAddress(result.data.address);
         setAge(result.data.age);
-        setDepartment(result.data.department)
+        setDepartment(result.data.department);
         setEmploymentStatus(result.data.employmentStatus);
       })
       .catch((err) => console.log(err));
   }, []);
-
-
 
   const dispatch = useDispatch();
 
@@ -47,7 +42,7 @@ function UpdateUser() {
         employmentStatus,
       })
       .then((result) => {
-        dispatch(addUser(result.data))
+        dispatch(addUser(result.data));
         console.log(result);
         navigate("/");
       })

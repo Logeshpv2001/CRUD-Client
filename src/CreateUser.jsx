@@ -6,16 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { addUser } from "./slices/userSlice";
 import { useDispatch } from "react-redux";
 
-
-// import axios from "axios";
-
 function CreateUser() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [age, setAge] = useState("");
   const [department, setDepartment] = useState("");
   const [employmentStatus, setEmploymentStatus] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const Submit = (e) => {
@@ -29,7 +26,7 @@ function CreateUser() {
         employmentStatus,
       })
       .then((result) => {
-        dispatch(addUser(result.data))
+        dispatch(addUser(result.data));
         console.log(result);
         navigate("/");
       })
@@ -90,7 +87,7 @@ function CreateUser() {
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        {/* <Form.Check type="checkbox" label="Check me out" /> */}
+        
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicEmploymentStatus">
