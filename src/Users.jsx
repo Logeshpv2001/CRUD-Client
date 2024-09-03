@@ -21,7 +21,7 @@ function Users() {
 
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:3001/deleteUser/" + id)
+      .delete("https://crud-server-1-vk1n.onrender.com/deleteUser" + id)
       .then((result) => {
         dispatch(deleteUser({id}))
         console.log(result);
