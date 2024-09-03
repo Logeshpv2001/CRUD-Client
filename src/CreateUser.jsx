@@ -21,7 +21,7 @@ function CreateUser() {
   const Submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/createUser", {
+      .post("https://crud-server-1-vk1n.onrender.com/createUser", {
         name,
         address,
         age,
